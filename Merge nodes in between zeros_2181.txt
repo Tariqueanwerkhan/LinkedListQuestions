@@ -1,0 +1,27 @@
+//https://leetcode.com/problems/merge-nodes-in-between-zeros/description/
+
+
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+        
+        int sum = 0;
+        ListNode curr = head;
+        ListNode temp = head.next;
+        ListNode lastcheck = null;
+
+        while(curr.next != null){
+            sum = 0;
+            while(temp.val != 0){
+            sum += temp.val;
+            temp = temp.next;
+            }
+            curr.val = sum;
+            curr.next = temp;
+            lastcheck = curr;
+            curr = curr.next;
+            temp = curr.next;
+        }
+        lastcheck.next = null;
+        return head;
+    }
+}
