@@ -1,0 +1,33 @@
+// 2265_Count Nodes equal to Average of Subtree
+
+
+class Solution {
+    int result;
+    
+    public int sum(TreeNode root, int[] count) {
+        if(root == null)
+            return 0;
+        count[0]++;
+        int l = sum(root.left, count);
+        int r = sum(root.right, count);
+        return l + r + root.val;
+    }
+    
+    public void solve(TreeNode root) {
+        if(root == null)
+            return;
+        int[] count = {0};
+        int totalSum = sum(root, count);
+        if((totalSum)/count[0] == root.val) {
+            result++;
+        }
+        solve(root.left);
+        solve(root.right);
+    }
+    
+    public int averageOfSubtree(TreeNode root) {
+        result = 0;
+        solve(root);
+        return result;
+    }
+}
